@@ -65,11 +65,26 @@ function getRandomQuote() {
   return quoteNumber;
 }
 
+/* These two functions should automatically update the quote, 
+but they don't work and I can't find out the reason why :( */
+
+  let timer = setInterval(printQuote, 10000);
+
+  function startInterval() {
+    timer = setInterval(printQuote, 10000);
+  }
+  function stopInterval() {
+    timer = clearInterval(timer);
+  }
+
 /* This is a function that prints a quote. It uncludes three conditional 
 statements, which add citations, years and tags to the quotes in case 
 if there are these kinds of information in the array of quotes.*/
 
 function printQuote() {
+  startInterval();
+  stopInterval();
+  changeBackground();
   let randomQuote = getRandomQuote();
   let htmlString = `<p>"${quotes[randomQuote].quote}"</p>`;
   htmlString += `<p>${quotes[randomQuote].source} `;
@@ -86,6 +101,15 @@ function printQuote() {
   return htmlString; 
 }
 
+/* This is a function that updates the background color to a random
+color each time when a new quote prints to the page. */
+
+function changeBackground() {
+  let col = `rgb(${Math.floor(Math.random()* 255)}, ${Math.floor(Math.random()* 255)}, ${Math.floor(Math.random()* 255)})`;
+  for (let i = 0; i < quotes.length; i ++) {
+    document.body.style.backgroundColor = col;
+  }
+}
 
 document.getElementById('quote-box').innerHTML = printQuote();
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
