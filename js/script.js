@@ -1,8 +1,7 @@
 // Treehouse FSJS Techdegree: Project 1 - A Random Quote Generator
 
-/* This is a dimensional array of objects. Each object contains a quote 
-and a source of the quote. Some objects contain also citation, year and 
-tags which can be related to the quote. */
+/* This is a dimensional array of objects. Each object contains a quote and a source of the quote. 
+Some objects contain also citation, year and tags which can be related to the quote. */
 
 let quotes = [
   {
@@ -55,54 +54,26 @@ let quotes = [
   }
 ]
 
-/* A getRandomQuote function returns a random quote object using 
-Math.random function to provide a random number and Math.floor
-function to round the reuslt of Math.random function downward to 
-its nearest interger.*/
+/* A getRandomQuote function returns a random quote object using Math.random function to provide a random number 
+and Math.floor function to round the reuslt of Math.random function downward to its nearest interger.*/
  
 function getRandomQuote() {
   let quoteNumber = Math.floor(Math.random() * quotes.length); 
-  return quoteNumber;
+  return quotes[quoteNumber];
 }
 
-/* These two functions should automatically update the quote, 
-but they don't work and I can't find out the reason why :( */
+/* These two functions update the quote automatically every 10 seconds. */
 
-  let timer = setInterval(printQuote, 10000);
+let timer = setInterval(printQuote, 10000);
 
-  function startInterval() {
-    timer = setInterval(printQuote, 10000);
-  }
-  function stopInterval() {
-    timer = clearInterval(timer);
-  }
-
-/* This is a function that prints a quote. It uncludes three conditional 
-statements, which add citations, years and tags to the quotes in case 
-if there are these kinds of information in the array of quotes.*/
-
-function printQuote() {
-  startInterval();
-  stopInterval();
-  changeBackground();
-  let randomQuote = getRandomQuote();
-  let htmlString = `<p>"${quotes[randomQuote].quote}"</p>`;
-  htmlString += `<p>${quotes[randomQuote].source} `;
-  if (quotes[randomQuote].citation) {
-    htmlString += `<span><em>${quotes[randomQuote].citation} </span>`;
-  }
-  if (quotes[randomQuote].year) {
-    htmlString += `<span>${quotes[randomQuote].year}</em></span>`;  
-  } 
-  if (quotes[randomQuote].tags) {
-    htmlString += `<p>${quotes[randomQuote].tags}`;
-  }
-  htmlString += `</p>`;
-  return htmlString; 
+function startInterval() {
+  timer = setInterval(printQuote, 10000);
+}
+function stopInterval() {
+  timer = clearInterval(timer);
 }
 
-/* This is a function that updates the background color to a random
-color each time when a new quote prints to the page. */
+/* This is a function that updates the background color to a random color each time when a new quote prints to the page. */
 
 function changeBackground() {
   let col = `rgb(${Math.floor(Math.random()* 255)}, ${Math.floor(Math.random()* 255)}, ${Math.floor(Math.random()* 255)})`;
@@ -111,5 +82,27 @@ function changeBackground() {
   }
 }
 
-document.getElementById('quote-box').innerHTML = printQuote();
+/* This is a function that prints a quote. It uncludes three conditional statements, which add citations, 
+years and tags to the quotes in case if there are these kinds of information in the array of quotes.*/
+
+function printQuote() {
+  let randomQuote = getRandomQuote();
+  let htmlString = `<p>"${randomQuote.quote}"</p>`;
+  htmlString += `<p>${randomQuote.source} `;
+  if (randomQuote.citation) {
+    htmlString += `<span><em>${randomQuote.citation} </span>`;
+  }
+  if (randomQuote.year) {
+    htmlString += `<span>${randomQuote.year}</em></span>`;  
+  } 
+  if (randomQuote.tags) {
+    htmlString += `<p>${randomQuote.tags}`;
+  }
+  htmlString += `</p>`;
+  document.getElementById('quote-box').innerHTML = htmlString; 
+  changeBackground();
+  startInterval();
+  stopInterval();
+}
+
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
