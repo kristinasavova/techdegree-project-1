@@ -87,13 +87,13 @@ years and tags to the quotes in case if there are these kinds of information in 
 
 function printQuote() {
   let randomQuote = getRandomQuote();
-  let htmlString = `<p>"${randomQuote.quote}"</p>`;
-  htmlString += `<p>${randomQuote.source} `;
+  let htmlString = `<p class="quote">${randomQuote.quote}</p>`;
+  htmlString += `<p class="source">${randomQuote.source} `;
   if (randomQuote.citation) {
-    htmlString += `<span><em>${randomQuote.citation} </span>`;
+    htmlString += `<span class="citation">${randomQuote.citation} </span>`;
   }
   if (randomQuote.year) {
-    htmlString += `<span>${randomQuote.year}</em></span>`;  
+    htmlString += `<span class="year">${randomQuote.year}</span>`;  
   } 
   if (randomQuote.tags) {
     htmlString += `<p>${randomQuote.tags}`;
