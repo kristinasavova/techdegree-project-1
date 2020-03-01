@@ -1,6 +1,6 @@
 // Treehouse FSJS Techdegree: Project 1 - A Random Quote Generator
 
-/* This is a dimensional array of objects. Each object contains a quote and a source of the quote. 
+/* This is an array of objects. Each object contains a quote and a source of the quote. 
 Some objects contain also citation, year and tags which can be related to the quote. */
 
 let quotes = [
